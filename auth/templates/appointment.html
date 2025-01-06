@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f7f9fc;
+        }
+
+        .doctor-card {
+            background: #fff;
+            border: 1px solid #e3e6f0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 15px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .doctor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .doctor-header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .doctor-header h4 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .doctor-header span {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .doctor-info {
+            font-size: 0.95rem;
+            color: #4e5d6c;
+        }
+
+        .doctor-info strong {
+            color: #212529;
+        }
+
+        .btn-appointment {
+            background-color: #4e73df;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-appointment:hover {
+            background-color: #375a7f;
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/dashboard">AIMS Hospital</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/appointment">Appointment</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/payment">Payment</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/prescription">Prescription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/help">Help</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex ms-auto">
+                        <form class="d-flex me-2" role="search" action=" " method="GET">
+                            <input class="form-control me-2" type="search" name="query" placeholder="Search"
+                                aria-label="Search">
+                            <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+                        </form>
+                        <a href="/login" class="btn btn-outline-success me-2">Login</a>
+                        <a href="/logout" class="btn btn-outline-danger me-2">Logout</a>
+
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-5">
+        <h1 class="text-center mb-4">Book Your Appointment</h1>
+        <div class="row">
+            {% for doctor in doctors %}
+            <div class="col-md-6 col-lg-4">
+                <div class="doctor-card">
+                    <div class="doctor-header">
+                        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Doctor Profile Picture">
+                        <div>
+                            <h4>{{ doctor.name }}</h4>
+                            <span>{{ doctor.specialization }}</span>
+                        </div>
+                    </div>
+                    <div class="doctor-info">
+                        <p><strong>Email:</strong> {{ doctor.email }}</p>
+                        <p><strong>Experience (years):</strong> {{ doctor.experience }}</p>
+                        <p><strong>Contact:</strong> {{ doctor.contact }}</p>
+                        <p><strong>Chamber Address:</strong> {{ doctor.address }}</p>
+                        <p><strong>Available Slots:</strong> {{ doctor.slots }} on {{ doctor.day }}</p>
+                        <p><strong>Fees:</strong> {{ doctor.fees }}</p>
+                    </div>
+                    <button onclick="location.href='/appointment_form'" class="btn btn-appointment w-100">Book Appointment</button>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+                <div class="alert alert-warning text-center" role="alert">
+                    No doctors are available at the moment. Please check back later.
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

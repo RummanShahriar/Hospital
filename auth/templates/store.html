@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMS Hospital - Prescribe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<!-- Navbar -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/pharmacist_dash">AIMS Hospital</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pharmacist_dash">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/prescribe">Prescribe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/store">Store</a>
+                    </li>
+                </ul>
+                <div class="d-flex ms-auto">
+                    <a href="/other_logout" class="btn btn-outline-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Medicine Store</h1>
+
+        <!-- Button to Add New Medicine -->
+        <div class="text-center mb-4">
+            <a href="{{ url_for('add_medicine') }}" class="btn btn-success">Add New Medicine</a>
+        </div>
+
+        <!-- Medicine Table -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Available Dose</th>
+                    <th>Price</th>
+                    <th>Side Effect</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medicine in medicines %}
+                <tr>
+                    <td>{{ medicine.name }}</td>
+                    <td>{{ medicine.available_dose }}</td>
+                    <td>${{ medicine.price }}</td>
+                    <td>{{ medicine.side_effect if medicine.side_effect else 'None' }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_medicine', id=medicine.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{ url_for('delete_medicine', id=medicine.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this medicine?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

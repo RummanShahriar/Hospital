@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Medicine</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Add New Medicine</h1>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="name">Medicine Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="available_dose">Available Dose (Quantity):</label>
+                <input type="number" class="form-control" id="available_dose" name="available_dose" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price per Unit:</label>
+                <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+            </div>
+
+            <div class="form-group">
+                <label for="side_effect">Side Effects (Optional):</label>
+                <textarea class="form-control" id="side_effect" name="side_effect"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Add Medicine</button>
+            <a href="{{ url_for('store') }}" class="btn btn-secondary">Back to Store</a>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
