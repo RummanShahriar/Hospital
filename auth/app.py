@@ -156,7 +156,7 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    return "Hello"
+    return redirect('/login')
 
 
 @app.route('/register', methods=['GET', 'POST'])
